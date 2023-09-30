@@ -2,15 +2,20 @@ from dash import Dash, html, dcc, callback, Output, Input
 import plotly.express as px
 import pandas as pd
 import requests
+import dash_bootstrap_components as dbc
+from dash_bootstrap_templates import load_figure_template
+load_figure_template(["cyborg", "darkly"])
+
 
 app = Dash(__name__)
-YOUR_TOKEN = "" # Add your token here
+YOUR_TOKEN = ""
 
 headers = {
     "Accept": "application/vnd.github.star+json",
     "Authorization": f"Bearer {YOUR_TOKEN}",
     "X-GitHub-Api-Version": "2022-11-28"
 }
+app = Dash(external_stylesheets=[dbc.themes.LUX])
 
 
 app.layout = html.Div(
@@ -78,10 +83,10 @@ def update_graph(value):
     if len(final_vals) > 0:
         df = pd.DataFrame(final_vals)
         df1 = df.groupby("date").sum().reset_index()
-        return px.line(df1, x="date", y="count", title=f"Stargazers for {value}")
+        return px.line(df1, x="date", y="count", title=f"Stargazers for {value}", template='darkly')
     else:
         df = pd.DataFrame(final_vals)
-        return px.line(df1, x="date", y="count", title=f"Stargazers for {value}")
+        return px.line(df1, x="date", y="count", title=f"Stargazers for {value}", template='darkly')
 
 @callback(
     Output('graph-content-contributor', 'figure'),

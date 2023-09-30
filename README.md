@@ -7,7 +7,7 @@
 
 ## How I built this and what I learned?
 
-[Medium]()
+[Medium](https://medium.com/@tshradheya/using-dash-to-create-github-dash-63613e1ed4dc)
 
 ## Demo
 
